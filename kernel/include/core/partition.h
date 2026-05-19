@@ -28,6 +28,19 @@
 #include <errno.h>
 #include <types.h>
 
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+#define POK_CONFIG_SUPERVISOR_PARTITION_ID 1
+
+/**
+ * Check whether the partition pid has supervisor privileges.
+ */
+static inline bool_t pok_partition_is_supervisor(uint8_t pid) {
+    // For simplicity, only partition 1 is supervisor.
+    // In future, this can be extended to multiple IDs.
+    return (pid == POK_CONFIG_SUPERVISOR_PARTITION_ID);
+}
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+
 /**
  * \enum pok_partition_mode_t
  * \brief The different modes of a partition
@@ -185,7 +198,10 @@ pok_current_partition_get_operating_mode(pok_partition_mode_t *op_mode);
 
 pok_ret_t pok_current_partition_get_lock_level(uint32_t *lock_level);
 
-pok_ret_t pok_current_partition_get_start_condition(
-    pok_start_condition_t *start_condition);
+pok_ret_t pok_current_partition_get_start_condition(pok_start_condition_t *start_condition);
+
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+pok_ret_t pok_partition_reinit_remote(uint8_t caller_pid, uint8_t target_pid);
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 
 #endif /* __POK_PARTITION_H__ */

@@ -45,6 +45,23 @@ uint8_t pok_partitions_index = 0;
 extern uint64_t pok_sched_slots[];
 extern uint64_t partition_processor_affinity[];
 
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE*/
+/*
+ * NEW: Reinit a partition on behalf of a supervisor.
+ * The caller must be a supervisor partition.
+ */
+pok_ret_t pok_partition_reinit_remote(uint8_t caller_pid, uint8_t target_pid) {
+    if (!pok_partition_is_supervisor(caller_pid)) {
+        return POK_ERRNO_EINVAL;
+    }
+    if (target_pid >= POK_CONFIG_NB_PARTITIONS) {
+        return POK_ERRNO_EINVAL;
+    }
+    pok_partition_reinit(target_pid);
+    return POK_ERRNO_OK;
+}
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE*/
+
 /**
  **\brief Setup the scheduler used in partition pid
  */
@@ -253,8 +270,7 @@ pok_ret_t pok_partition_init() {
  * POK_ERRNO_PARTITION_MODE when requested mode is invalid.
  * Else, returns POK_ERRNO_OK
  */
-pok_ret_t pok_partition_set_mode(const uint8_t pid,
-                                 const pok_partition_mode_t mode) {
+pok_ret_t pok_partition_set_mode(const uint8_t pid, const pok_partition_mode_t mode) {
   switch (mode) {
   case POK_PARTITION_MODE_NORMAL:
     /*
