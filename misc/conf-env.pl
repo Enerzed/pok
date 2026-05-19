@@ -38,7 +38,7 @@ my @cflags =
  "-W",
  "-Wall",
  "-g",
- "-m32"
+ ""
  );
 
 my @ldflags =
@@ -70,7 +70,7 @@ my %tools_arch;
 $tools_arch{"x86"} =
 {
  "AR" 	      =>  ["i386-unknown-linux-gnu-ar.exe", "i386-elf-ar" , "ar"],
- "CC"          =>  ["i386-unknown-linux-gnu-gcc.exe", "i386-elf-gcc", "gcc"],
+ "CC"          =>  ["i386-unknown-linux-gnu-i686-linux-gnu-gcc.exe", "i386-elf-i686-linux-gnu-gcc", "i686-linux-gnu-gcc"],
  "CXX"	      =>  ["i386-unknown-linux-gnu-g++.exe", "i386-elf-g++", "g++"],
  "LD"	         =>  ["i386-unknown-linux-gnu-ld.exe", "i386-elf-ld" , "ld"],
  "OBJDUMP"     =>  ["i386-unknown-linux-gnu-objdump.exe", "i386-elf-objdump" , "objdump"],
@@ -82,7 +82,7 @@ $tools_arch{"x86"} =
 $tools_arch{"ppc"} =
 {
  "AR" 	      =>  ["powerpc-elf-ar","powerpc-linux-gnu-ar"],
- "CC"          =>  ["powerpc-elf-gcc","powerpc-linux-gnu-gcc"],
+ "CC"          =>  ["powerpc-elf-i686-linux-gnu-gcc","powerpc-linux-gnu-i686-linux-gnu-gcc"],
  "LD"	         =>  ["powerpc-elf-ld","powerpc-linux-gnu-ld"],
  "OBJDUMP"     =>  ["powerpc-elf-objdump","powerpc-linux-gnu-objdump"],
  "OBJCOPY"     =>  ["powerpc-elf-objcopy","powerpc-linux-gnu-objcopy"],
@@ -93,7 +93,7 @@ $tools_arch{"ppc"} =
 $tools_arch{"sparc"} =
 {
  "AR" 	      =>  ["sparc-elf-ar","sparc-linux-gnu-ar"],
- "CC"          =>  ["sparc-elf-gcc","sparc-linux-gnu-gcc"],
+ "CC"          =>  ["sparc-elf-i686-linux-gnu-gcc","sparc-linux-gnu-i686-linux-gnu-gcc"],
  "LD"	         =>  ["sparc-elf-ld","sparc-linux-gnu-ld"],
  "OBJDUMP"     =>  ["sparc-elf-objdump","sparc-linux-gnu-objdump"],
  "OBJCOPY"     =>  ["sparc-elf-objcopy","sparc-linux-gnu-objcopy"],

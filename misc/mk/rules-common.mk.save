@@ -1,15 +1,14 @@
 ECHO_FLAGS_ONELINE=-n
 
-AR=i686-linux-gnu-ar
-CC=i686-linux-gnu-gcc
-CXX=i686-linux-gnu-g++
-LD=i686-linux-gnu-ld
-OBJCOPY=i686-linux-gnu-objcopy
-OBJDUMP=i686-linux-gnu-objdump
-RANLIB=i686-linux-gnu-ranlib
-
+AR=$(AR_$(ARCH))
+CC=$(CC_$(ARCH))
+CXX=$(CXX_$(ARCH))
+LD=$(LD_$(ARCH))
+OBJCOPY=$(OBJCOPY_$(ARCH))
+OBJDUMP=$(OBJDUMP_$(ARCH))
 QEMU=$(QEMU_$(ARCH))
 CONFIG_QEMU=$(CONFIG_QEMU_$(ARCH))
+RANLIB=$(RANLIB_$(ARCH))
 GNATMAKE=$(GNATMAKE_$(ARCH))
 
 CFLAGS+=-D__POK_C__

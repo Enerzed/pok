@@ -6,7 +6,7 @@ NEEDS_FLAGS=
 
 generate:
 	for v in `find $(POK_PATH)/libpok/include/ -type f -name '*.h'`; do \
-		gcc $(CFLAGS) $(NEEDS_FLAGS) -fdump-ada-spec -I$(POK_PATH)/libpok/include/ $$v ;  echo $$v ; \
+		i686-linux-gnu-gcc $(CFLAGS) $(NEEDS_FLAGS) -fdump-ada-spec -I$(POK_PATH)/libpok/include/ $$v ;  echo $$v ; \
 	done
 # Change types
 	for v in *.ads; do sed -e 's/size_t/Size_T/g' $$v > /tmp/tmp.ads ; mv /tmp/tmp.ads $$v  ; done
