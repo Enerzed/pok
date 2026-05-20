@@ -3,6 +3,8 @@ TOPDIR=		../../
 include $(TOPDIR)/misc/mk/config.mk
 -include $(TOPDIR)/misc/mk/common-$(ARCH).mk
 
+CFLAGS += -DPOK_NEEDS_ARINC653_PARTITION=1
+
 LO_TARGET=arinc653.lo
 
 LO_OBJS=	\

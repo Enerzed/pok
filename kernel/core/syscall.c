@@ -202,6 +202,11 @@ pok_ret_t pok_core_syscall(const pok_syscall_id_t syscall_id,
 
   case POK_SYSCALL_PARTITION_SET_MODE:
     return pok_partition_set_mode_current((pok_partition_mode_t)args->arg1);
+  
+  /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+  case POK_SYSCALL_PARTITION_REINIT_REMOTE:
+      return pok_partition_reinit_remote((uint8_t)infos->partition, (uint8_t)args->arg1);
+  /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 
   case POK_SYSCALL_PARTITION_GET_ID:
     CHECK_PTR((void *)args->arg1, sizeof(uint8_t));

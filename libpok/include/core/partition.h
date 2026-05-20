@@ -48,3 +48,5 @@ typedef enum {
 #define pok_current_partition_get_start_condition(start_condition)             \
   pok_syscall2(POK_SYSCALL_PARTITION_GET_START_CONDITION,                      \
                (uint32_t)start_condition, 0)
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+pok_ret_t pok_partition_reinit_remote (uint8_t target_pid);

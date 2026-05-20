@@ -18,6 +18,8 @@
 #include <arinc653/types.h>
 
 #include <core/partition.h>
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+#include <core/syscall.h>
 
 #include <errno.h>
 
@@ -73,6 +75,27 @@ void SET_PARTITION_MODE(OPERATING_MODE_TYPE operating_mode,
   }
   core_ret = pok_partition_set_mode(core_mode);
   *return_code = core_ret;
+}
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+pok_ret_t pok_partition_reinit_remote (uint8_t target_pid)
+{
+   return (pok_syscall2 (POK_SYSCALL_PARTITION_REINIT_REMOTE, 
+                         (uint32_t) target_pid, 
+                         0));
+}
+
+void REINIT_PARTITION_REMOTE (uint8_t target_pid, RETURN_CODE_TYPE *return_code)
+{
+   pok_ret_t core_ret = pok_partition_reinit_remote(target_pid);
+   
+   if (core_ret == POK_ERRNO_OK)
+   {
+      *return_code = NO_ERROR;
+   }
+   else
+   {
+      *return_code = INVALID_PARAM;
+   }
 }
 
 #endif

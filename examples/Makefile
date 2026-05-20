@@ -31,7 +31,9 @@ SUBDIRS= \
 	network					\
 	partitions-scheduling			\
 	partitions-threads			\
-
+	supervisor \
+	
+# MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE
 #	mutexes				\ ### deprecated Makefile
 #	mutexes-timed			\ ### deprecated Makefile
 #	semaphores			\ ### deprecated Makefile

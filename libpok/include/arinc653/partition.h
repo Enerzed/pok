@@ -1,25 +1,22 @@
 /*
  *                               POK header
- *
- * The following file is a part of the POK project. Any modification should
- * be made according to the POK licence. You CANNOT use this file or a part
- * of a file for your own project.
- *
- * For more information on the POK licence, please see our LICENCE FILE
- *
- * Please follow the coding guidelines described in doc/CODING_GUIDELINES
- *
- *                                      Copyright (c) 2007-2025 POK team
  */
+
+#ifndef __LIBPOK_ARINC653_PARTITION_H__
+#define __LIBPOK_ARINC653_PARTITION_H__
 
 #ifdef POK_NEEDS_ARINC653_PARTITION
 
-#include <arinc653/process.h>
 #include <arinc653/types.h>
+#include "process.h"
 
 #ifndef APEX_PARTITION
 #define APEX_PARTITION
 #define MAX_NUMBER_OF_PARTITIONS SYSTEM_LIMIT_NUMBER_OF_PARTITIONS
+
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+typedef APEX_INTEGER LOCK_LEVEL_TYPE;
+
 typedef enum {
   IDLE = 0,
   COLD_START = 1,
@@ -52,4 +49,9 @@ extern void SET_PARTITION_MODE(
     /*out*/ RETURN_CODE_TYPE *RETURN_CODE);
 #endif
 
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+void REINIT_PARTITION_REMOTE (unsigned char target_pid, RETURN_CODE_TYPE *return_code);
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+
+#endif
 #endif
