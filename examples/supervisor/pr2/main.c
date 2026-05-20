@@ -9,7 +9,7 @@ void* supervisor_thread ()
    uint32_t last_heartbeat = 0;
    uint32_t current_heartbeat = 0;
 
-   printf ("[Partition 1 (Supervisor)]: monitoring started.\n");
+   printf ("[Partition 1 (Supervisor)]: Monitoring started.\n");
    
    while (1)
    {
@@ -19,7 +19,7 @@ void* supervisor_thread ()
 
       if (current_heartbeat == last_heartbeat && current_heartbeat > 0)
       {
-         printf ("[Partition 1 (Supervisor)]: Detected failure didn't receive heartbeat in time:!\n");
+         printf ("[Partition 1 (Supervisor)]: Detected failure! Didn't receive the heartbeat:!\n");
          printf ("[Partition 1 (Supervisor)]: Calling REINIT_PARTITION_REMOTE... \n");
          
          REINIT_PARTITION_REMOTE (0, &ret_arinc);
@@ -31,7 +31,6 @@ void* supervisor_thread ()
       }
       else
       {
-         // Система здорова, обновляем значение
          last_heartbeat = current_heartbeat;
       }
    }
