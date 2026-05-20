@@ -206,6 +206,12 @@ pok_ret_t pok_core_syscall(const pok_syscall_id_t syscall_id,
   /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
   case POK_SYSCALL_PARTITION_REINIT_REMOTE:
       return pok_partition_reinit_remote((uint8_t)infos->partition, (uint8_t)args->arg1);
+
+  case POK_SYSCALL_HEARTBEAT_PULSE:
+    return pok_partition_heartbeat_pulse((uint8_t)infos->partition);
+
+  case POK_SYSCALL_HEARTBEAT_CHECK:
+    return pok_partition_heartbeat_check((uint8_t)args->arg1);
   /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 
   case POK_SYSCALL_PARTITION_GET_ID:

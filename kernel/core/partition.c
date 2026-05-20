@@ -40,10 +40,29 @@
 pok_partition_t pok_partitions[POK_CONFIG_NB_PARTITIONS];
 uint32_t current_threads[POK_CONFIG_NB_PROCESSORS];
 
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+volatile uint32_t pok_partition_heartbeats[POK_CONFIG_NB_PARTITIONS] = {0, 0};
+
+
 uint8_t pok_partitions_index = 0;
 
 extern uint64_t pok_sched_slots[];
 extern uint64_t partition_processor_affinity[];
+
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+pok_ret_t pok_partition_heartbeat_pulse(uint8_t partition_id) {
+    pok_partition_heartbeats[partition_id]++;
+    return POK_ERRNO_OK;
+}
+
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+uint32_t pok_partition_heartbeat_check(uint8_t target_pid) {
+    if (target_pid >= POK_CONFIG_NB_PARTITIONS) return 0;
+    return pok_partition_heartbeats[target_pid];
+}
+
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE*/
+extern volatile uint32_t pok_partition_heartbeats[POK_CONFIG_NB_PARTITIONS];
 
 /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE*/
 /*
@@ -57,7 +76,10 @@ pok_ret_t pok_partition_reinit_remote(uint8_t caller_pid, uint8_t target_pid) {
     if (target_pid >= POK_CONFIG_NB_PARTITIONS) {
         return POK_ERRNO_EINVAL;
     }
+
     pok_partition_reinit(target_pid);
+    pok_partition_heartbeats[target_pid] = 0;
+
     return POK_ERRNO_OK;
 }
 /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE*/

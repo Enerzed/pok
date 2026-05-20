@@ -98,4 +98,14 @@ void REINIT_PARTITION_REMOTE (uint8_t target_pid, RETURN_CODE_TYPE *return_code)
    }
 }
 
+void POK_HEARTBEAT_PULSE (void) {
+  pok_syscall0 (412);
+}
+
+uint32_t POK_HEARTBEAT_CHECK (uint8_t target_pid) {
+  return (uint32_t) pok_syscall1 (413, (uint32_t)target_pid);
+}
+
+/* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
+
 #endif

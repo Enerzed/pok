@@ -5,25 +5,38 @@
 
 void* supervisor_thread ()
 {
-   RETURN_CODE_TYPE ret;
-   printf ("[Partition 1 (Supervisor)]: Watching Partition 0...\n");
-   
-   pok_thread_sleep (7000000);
+   RETURN_CODE_TYPE ret_arinc;
+   uint32_t last_heartbeat = 0;
+   uint32_t current_heartbeat = 0;
 
-   printf ("[Partition 1 (Supervisor)]: Partition 0 not responding REINIT_PARTITION_REMOTE...\n");
+   printf ("[Partition 1 (Supervisor)]: monitoring started.\n");
    
-   REINIT_PARTITION_REMOTE(0, &ret);
-   
-   if (ret == NO_ERROR) {
-      printf ("[Partition 1 (Supervisor)]: Reinit successful!\n");
-   } else {
-      printf ("[Partition 1 (Supervisor)]: Reinit failed ARINC: %d\n", ret);
-   }
+   while (1)
+   {
+      pok_thread_sleep (2000000); 
 
-   while (1) {
-      pok_thread_sleep (1000000);
+      current_heartbeat = POK_HEARTBEAT_CHECK(0);
+
+      if (current_heartbeat == last_heartbeat && current_heartbeat > 0)
+      {
+         printf ("[Partition 1 (Supervisor)]: Detected failure didn't receive heartbeat in time:!\n");
+         printf ("[Partition 1 (Supervisor)]: Calling REINIT_PARTITION_REMOTE... \n");
+         
+         REINIT_PARTITION_REMOTE (0, &ret_arinc);
+         
+         current_heartbeat = 0;
+         last_heartbeat = 0;
+         
+         pok_thread_sleep (3000000);
+      }
+      else
+      {
+         // Система здорова, обновляем значение
+         last_heartbeat = current_heartbeat;
+      }
    }
 }
+
 
 int main ()
 {
@@ -32,6 +45,7 @@ int main ()
 
    attr.priority = 42;
    attr.entry = supervisor_thread;
+   
    pok_thread_create (&tid, &attr);
 
    pok_thread_wait_infinite ();

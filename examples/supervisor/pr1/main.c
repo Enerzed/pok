@@ -1,3 +1,4 @@
+#include <arinc653/partition.h>
 #include <core/thread.h>
 #include <libc/stdio.h>
 
@@ -8,6 +9,9 @@ void* user_thread1 ()
    {
       counter++;
       printf ("[Partition 0 (Worker)]: Working, step %d\n", counter);
+      
+      POK_HEARTBEAT_PULSE();
+
       pok_thread_sleep (1000000);
 
       if (counter == 4)
@@ -26,6 +30,7 @@ int main ()
 
    attr.priority = 42;
    attr.entry = user_thread1;
+   
    pok_thread_create (&tid, &attr);
 
    pok_thread_wait_infinite ();

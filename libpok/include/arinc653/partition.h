@@ -51,6 +51,10 @@ extern void SET_PARTITION_MODE(
 
 /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 void REINIT_PARTITION_REMOTE (unsigned char target_pid, RETURN_CODE_TYPE *return_code);
+
+void POK_HEARTBEAT_PULSE (void);
+
+uint32_t POK_HEARTBEAT_CHECK (uint8_t target_pid);
 /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 
 #endif

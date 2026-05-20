@@ -202,6 +202,10 @@ pok_ret_t pok_current_partition_get_start_condition(pok_start_condition_t *start
 
 /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 pok_ret_t pok_partition_reinit_remote(uint8_t caller_pid, uint8_t target_pid);
+
+pok_ret_t pok_partition_heartbeat_pulse (uint8_t partition_id);
+
+uint32_t  pok_partition_heartbeat_check (uint8_t target_pid);
 /* MODDED. PLEASE INSERT TO KEEP CHANGES VISIBLE */
 
 #endif /* __POK_PARTITION_H__ */
