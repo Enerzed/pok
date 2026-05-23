@@ -2,6 +2,8 @@
 #include <core/thread.h>
 #include <libc/stdio.h>
 
+#define WORKER_SLEEP 1000000
+
 void* user_thread1 ()
 {
    int counter = 0;
@@ -12,7 +14,7 @@ void* user_thread1 ()
       
       POK_HEARTBEAT_PULSE();
 
-      pok_thread_sleep (1000000);
+      pok_thread_sleep (WORKER_SLEEP);
 
       if (counter == 4)
       {

@@ -3,6 +3,8 @@
 #include <core/thread.h>
 #include <libc/stdio.h>
 
+#define SUPERVISOR_SLEEP 2000000
+
 void* supervisor_thread ()
 {
    RETURN_CODE_TYPE ret_arinc;
@@ -13,7 +15,7 @@ void* supervisor_thread ()
    
    while (1)
    {
-      pok_thread_sleep (2000000); 
+      pok_thread_sleep (SUPERVISOR_SLEEP); 
 
       current_heartbeat = POK_HEARTBEAT_CHECK(0);
 
@@ -27,7 +29,7 @@ void* supervisor_thread ()
          current_heartbeat = 0;
          last_heartbeat = 0;
          
-         pok_thread_sleep (3000000);
+         pok_thread_sleep (2*SUPERVISOR_SLEEP);
       }
       else
       {
