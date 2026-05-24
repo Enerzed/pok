@@ -1,4 +1,4 @@
-Forked repository was created for development of Erlang-style supervisor. You need to build the example in examples/supervisor folder using 'make all' command installing specific libriaries like 'i686-gcc', 'qemu', 'libxml' and maybe more beforehand. Then you may run with 'qemu-system-i386 -kernel pok.elf -serial stdio' in the same folder.
+Forked repository was created for development of Erlang-style supervisor. You need to build the example in examples/supervisor folder using `make all` command installing specific libriaries like `i686-gcc`, `qemu`, `libxml` and maybe more beforehand. Then you may run with `qemu-system-i386 -kernel pok.elf -serial stdio` in the same folder.
 
 NEXT INFORMATION IS FROM ORIGINAL GITHUB REPOSITORY
 
